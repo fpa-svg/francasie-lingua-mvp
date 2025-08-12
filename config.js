@@ -36,12 +36,13 @@ class ConfigLoader {
 
     // Get environment variable (browser compatibility)
     getEnvVar(name) {
-        // For Vercel deployment - environment variables are injected at build time
-        if (typeof process !== 'undefined' && process.env) {
-            return process.env[name];
+        // For client-side deployment, environment variables need to be injected differently
+        // Check if window.__ENV__ exists (injected at build time)
+        if (window.__ENV__ && window.__ENV__[name]) {
+            return window.__ENV__[name];
         }
         
-        // For development - you can use URL parameters or localStorage
+        // For development - you can use URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const urlValue = urlParams.get(name.toLowerCase());
         if (urlValue) return urlValue;
