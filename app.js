@@ -582,9 +582,10 @@ class App {
     constructor() {
         this.dom = new DOMElements();
         this.demoAuth = new DemoAuthManager();
-        // this.firebase = new FirebaseManager(); // Commented for demo
-        this.googleAPI = new GoogleAPIManager();
-        this.openai = new OpenAIManager();
+        // Managers will be initialized after config is loaded
+        this.firebase = null;
+        this.googleAPI = null;
+        this.openai = null;
         this.isDragging = false;
         this.dragOffset = { x: 0, y: 0 };
         this.modalLock = false; // Prevent concurrent modal operations
@@ -606,6 +607,12 @@ class App {
             // Initialize configuration first
             console.log("🔄 Loading configuration...");
             await initializeConfig();
+            
+            // Initialize managers after config is loaded
+            console.log("🔄 Initializing managers...");
+            // this.firebase = new FirebaseManager(); // Commented for demo
+            this.googleAPI = new GoogleAPIManager();
+            this.openai = new OpenAIManager();
             
             // Hide all modals on page load
             this.hideAllModals();
