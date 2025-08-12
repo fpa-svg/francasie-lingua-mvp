@@ -1,19 +1,8 @@
 {
-  "functions": {
-    "app.js": {
-      "memory": 128
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  },
-  "env": {
-    "FIREBASE_API_KEY": "@firebase_api_key",
-    "GOOGLE_API_KEY": "@google_api_key", 
-    "OPENAI_API_KEY": "@openai_api_key"
-  },
-  "build": {
-    "env": {
-      "FIREBASE_API_KEY": "@firebase_api_key",
-      "GOOGLE_API_KEY": "@google_api_key",
-      "OPENAI_API_KEY": "@openai_api_key"
-    }
-  }
+  ]
 }
