@@ -1,0 +1,27 @@
+{
+  "name": "francasie-lingua-mvp",
+  "version": "1.0.0",
+  "description": "French language learning MVP for Vietnamese users",
+  "main": "index.html",
+  "scripts": {
+    "dev": "serve .",
+    "build": "echo 'Static site - no build needed'",
+    "start": "serve .",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "french",
+    "language-learning",
+    "vietnamese",
+    "education",
+    "ai-tutor"
+  ],
+  "author": "FrancAsie Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

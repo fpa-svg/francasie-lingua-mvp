@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(findstr:*)",
+      "mcp__serena__list_dir",
+      "mcp__serena__activate_project",
+      "mcp__serena__read_file",
+      "mcp__serena__replace_regex",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__find_symbol",
+      "mcp__serena__insert_after_symbol",
+      "Bash(node:*)",
+      "Bash(git rm:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "mcp__serena__create_text_file",
+      "mcp__serena__execute_shell_command",
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "Bash(git reset:*)",
+      "Bash(git init:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

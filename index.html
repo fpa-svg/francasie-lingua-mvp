@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrancAsie Lingua - Học ngôn ngữ, Kết nối văn hóa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page">
+        <header class="header">
+            <div class="container flex items-center justify-between py-4">
+                <div class="logo">
+                    <div class="logo-icon">F</div>
+                    <span>FrancAsie</span>
+                </div>
+                <button id="login-btn" class="btn btn-primary btn-sm">Đăng nhập</button>
+            </div>
+        </header>
+
+        <main class="hero">
+            <div class="bounce-in">
+    <h1>Học ngôn ngữ,<br>Kết nối văn hóa</h1>
+    <p>Nền tảng duy nhất kết hợp AI thông minh và cộng đồng giao lưu Pháp-Việt để bạn học nhanh hơn, vui hơn! 🎯</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+    <button id="register-btn" class="btn btn-success hero-cta">
+        🚀 Bắt đầu miễn phí
+    </button>
+</div>
+    </div>
+</div>
+
+            <div class="feature-grid fade-in">
+                <div class="feature-card">
+                    <div class="feature-icon gradient-blue-purple">🎓</div>
+                    <h3>AI Thông minh</h3>
+                    <p class="text-gray-600">Luyện phản xạ với AI, được sửa lỗi tức thì và học theo phong cách riêng</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon gradient-green-blue">💬</div>
+                    <h3>Kết nối thực tế</h3>
+                    <p class="text-gray-600">Giao lưu với người bản xứ qua video call, học từ những câu chuyện thật</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon gradient-purple-pink">🏆</div>
+                    <h3>Gamification</h3>
+                    <p class="text-gray-600">Chuỗi học tập, huy hiệu, bảng xếp hạng - biến học tập thành trò chơi!</p>
+                </div>
+            </div>
+
+            <!-- Landing Page Testimonials -->
+            <section class="landing-testimonials" id="landing-testimonials">
+                <div class="container">
+                    <h2 class="section-title">💬 Chia sẻ từ học viên</h2>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"FrancAsie Lingua giúp tôi học tiếng Pháp một cách thú vị và hiệu quả. Các bài học rất dễ hiểu!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar" style="background: #ef4444;">L</div>
+                                <div class="author-info">
+                                    <h5>Lan Nguyen</h5>
+                                    <span>Học viên A2</span>
+                                </div>
+                                <div class="testimonial-rating">
+                                    ⭐⭐⭐⭐⭐
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"Tính năng AI Tutor thật tuyệt vời! Tôi có thể luyện tập mọi lúc mọi nơi."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar" style="background: #10b981;">T</div>
+                                <div class="author-info">
+                                    <h5>Tuan Le</h5>
+                                    <span>Học viên B1</span>
+                                </div>
+                                <div class="testimonial-rating">
+                                    ⭐⭐⭐⭐⭐
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p>"Video call 1-1 với native speaker giúp tôi cải thiện khả năng giao tiếp rất nhiều!"</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar" style="background: #8b5cf6;">M</div>
+                                <div class="author-info">
+                                    <h5>Minh Anh</h5>
+                                    <span>Học viên A1</span>
+                                </div>
+                                <div class="testimonial-rating">
+                                    ⭐⭐⭐⭐⭐
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Landing Page Events -->
+            <section class="landing-events">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">📅 Sự kiện sắp tới</h2>
+                        <p>Tham gia các hoạt động thú vị cùng cộng đồng FrancAsie</p>
+                    </div>
+                    <div class="home-events-grid">
+                        <div class="home-event-card">
+                            <div class="event-image">🎭</div>
+                            <div class="event-info">
+                                <h4>Buổi thực hành hội thoại</h4>
+                                <p class="event-time">🕒 Thứ 7, 19:00 - 21:00</p>
+                                <p class="event-desc">Luyện tập giao tiếp với các bạn học cùng level</p>
+                            </div>
+                            <button class="btn btn-primary btn-sm event-register-btn" data-event-id="1">
+                                Đăng ký
+                            </button>
+                        </div>
+
+                        <div class="home-event-card">
+                            <div class="event-image">🍷</div>
+                            <div class="event-info">
+                                <h4>Workshop văn hóa Pháp</h4>
+                                <p class="event-time">🕒 Chủ nhật, 14:00 - 16:00</p>
+                                <p class="event-desc">Khám phá ẩm thực và truyền thống Pháp</p>
+                            </div>
+                            <button class="btn btn-primary btn-sm event-register-btn" data-event-id="2">
+                                Đăng ký
+                            </button>
+                        </div>
+
+                        <div class="home-event-card">
+                            <div class="event-image">🎯</div>
+                            <div class="event-info">
+                                <h4>Thử thách từ vựng</h4>
+                                <p class="event-time">🕒 Thứ 3, 20:00 - 21:00</p>
+                                <p class="event-desc">Cuộc thi vui về từ vựng tiếng Pháp</p>
+                            </div>
+                            <button class="btn btn-primary btn-sm event-register-btn" data-event-id="3">
+                                Đăng ký
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Main App -->
+    <div id="main-app" class="hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="container flex items-center justify-between py-3">
+                <div class="logo">
+                    <div class="logo-icon">F</div>
+                    <span>FrancAsie</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav">
+                    <button data-page="dashboard" class="nav-link active">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                        </svg>
+                        Bảng điều khiển
+                    </button>
+                    <button data-page="lessons" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                        Bài học
+                    </button>
+                    <button data-page="ai-chat" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .6.4 1 1 1h.5c.2 0 .5-.1.6-.2L14.1 18H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                        </svg>
+                        AI Tutor
+                    </button>
+                    <button data-page="community" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z"/>
+                        </svg>
+                        Cộng đồng
+                    </button>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Streak Counter -->
+                    <div class="streak-counter">
+                        <span class="streak-icon">🔥</span>
+                        <span id="streak-count">7</span>
+                    </div>
+                    <!-- User Menu -->
+                    <div class="user-menu">
+                        <img id="user-avatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2MzY2ZjEiLz4KPHR4dCB4PSIxNiIgeT0iMjEiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5VPC90eHQ+Cjwvc3ZnPgo=" alt="Avatar">
+                        <span id="user-name" class="user-name">Minh Anh</span>
+                        <button id="logout-btn" class="logout-btn">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Dashboard Page -->
+            <div id="dashboard-page" class="page-content">
+                <div class="container space-y-6">
+                    
+                    <!-- Welcome Section -->
+                    <div class="welcome-section fade-in">
+                        <div class="welcome-header">
+                            <h1 id="welcome-message">Xin chào, Minh Anh!</h1>
+                            <span class="greeting-emoji">👋</span>
+                        </div>
+                        <p class="welcome-subtitle">Hôm nay bạn muốn học gì? Hãy tiếp tục hành trình của mình!</p>
+                    </div>
+
+                    <!-- Daily Goal Progress -->
+                    <div class="progress-card">
+                        <div class="progress-info">
+                            <h3>Mục tiêu hôm nay</h3>
+                            <p>3 / 5 bài học hoàn thành</p>
+                        </div>
+                        <div class="progress-ring-container">
+                            <svg class="progress-ring" viewBox="0 0 64 64">
+                                <circle class="progress-ring-bg" cx="32" cy="32" r="28"></circle>
+                                <circle class="progress-ring-fill" cx="32" cy="32" r="28"></circle>
+                            </svg>
+                            <div class="progress-text">60%</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Grid -->
+                    <div class="actions-grid">
+    
+    <!-- Video Call Section -->
+    <div class="action-card">
+        <div class="action-header">
+            <div class="action-icon bg-green">📞</div>
+            <div class="action-info">
+                <h3>Gọi video 1-1</h3>
+                <p>Kết nối với bạn học hoặc giáo viên</p>
+            </div>
+        </div>
+        <div class="action-content">
+            <div class="partner-selection">
+                <label class="form-label">Chọn bạn học để gọi:</label>
+                <div id="quick-partners" class="quick-partners-grid">
+                    <!-- Partners will be populated by JavaScript -->
+                </div>
+                <div class="or-divider">
+                    <span>hoặc</span>
+                </div>
+                <input id="partner-email" type="email" class="form-input" placeholder="Nhập email người khác...">
+            </div>
+            <button id="start-video-call" class="btn btn-success full-width">
+                <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                </svg>
+                <span id="call-btn-text">Bắt đầu cuộc gọi</span>
+                <div id="call-btn-spinner" class="spinner-sm hidden"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Chat Section -->
+    <div class="action-card">
+        <div class="action-header">
+            <div class="action-icon bg-purple">🤖</div>
+            <div class="action-info">
+                <h3>AI Tutor</h3>
+                <p>Luyện tập với trợ lý thông minh</p>
+            </div>
+        </div>
+        <div class="action-content">
+            <div class="ai-topic-section">
+                <label class="form-label">Chọn chủ đề để chat:</label>
+                <div id="ai-topics-grid" class="ai-topics-grid">
+                    <!-- Topic cards will be populated by JavaScript -->
+                </div>
+                <div class="or-divider">
+                    <span>hoặc</span>
+                </div>
+                <input id="custom-topic-input" type="text" class="form-input" placeholder="Nhập chủ đề tùy chọn...">
+            </div>
+            <div class="ai-actions-row">
+                <button id="generate-topic" class="btn btn-outline btn-large">
+                    <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="topic-btn-text">Đề xuất</span>
+                    <div id="topic-btn-spinner" class="spinner-sm hidden"></div>
+                </button>
+                <button id="chat-with-topic" class="btn btn-primary btn-large">
+                    <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span id="chat-btn-text">Chat với AI</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>`
+
+
+                    <!-- Learning Path -->
+                    <div class="learning-path-card">
+                        <h3>Lộ trình học của bạn</h3>
+                        <div class="path-grid">
+                            
+                            <div class="path-item completed">
+                                <div class="path-status">
+                                    <svg fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h4>Cơ bản</h4>
+                                <p>Hoàn thành</p>
+                                <div class="path-progress">
+                                    <div class="path-progress-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="path-item current">
+                                <div class="path-status">3</div>
+                                <h4>Trung bình</h4>
+                                <p>3/10 bài</p>
+                                <div class="path-progress">
+                                    <div class="path-progress-bar" style="width: 30%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="path-item locked">
+                                <div class="path-status">
+                                    <svg fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h4>Nâng cao</h4>
+                                <p>Chưa mở khóa</p>
+                                <div class="path-progress">
+                                    <div class="path-progress-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="path-item locked">
+                                <div class="path-status">
+                                    <svg fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h4>Chuyên nghiệp</h4>
+                                <p>Chưa mở khóa</p>
+                                <div class="path-progress">
+                                    <div class="path-progress-bar" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Lessons Page -->
+            <div id="lessons-page" class="page-content hidden">
+                <div class="container space-y-6">
+                    <div class="page-header">
+                        <h1>Bài học tiếng Pháp</h1>
+                        <div class="level-badge">
+                            <svg fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Level A1</span>
+                        </div>
+                    </div>
+
+                    <div class="current-lesson-card">
+                        <div class="lesson-info">
+                            <h2>Bài 4: La famille</h2>
+                            <p>Học từ vựng về gia đình</p>
+                        </div>
+                        <div class="lesson-progress">
+                            <div class="progress-percent">75%</div>
+                            <div class="progress-label">Hoàn thành</div>
+                        </div>
+                        <button class="btn btn-white">Tiếp tục học</button>
+                    </div>
+
+                    <div id="lessons-grid" class="lessons-grid">
+                        <!-- Lessons will be populated by JavaScript -->
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- AI Chat Page -->
+            <div id="ai-chat-page" class="page-content hidden">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-user-info">
+                            <div class="chat-avatar">AI</div>
+                            <div class="chat-user-details">
+                                <h2>Trợ lý AI GPT</h2>
+                                <div class="status-indicator">
+                                    <div class="status-dot"></div>
+                                    <span>Đang hoạt động</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message ai">
+                            <div class="message-avatar">AI</div>
+                            <div class="message-bubble">
+                                <p>Bonjour! Je suis votre tuteur IA. Comment allez-vous aujourd'hui? 😊</p>
+                                <p class="ai-tip">💡 Mẹo: Hãy thử trả lời bằng tiếng Pháp!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-area">
+                        <form class="chat-form" id="chat-form">
+                            <input class="chat-input" id="chat-input" type="text" placeholder="Tapez votre message en français...">
+                            <button type="submit" class="chat-send">
+                                <svg fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community Page -->
+            <div id="community-page" class="page-content hidden">
+                <div class="container space-y-6">
+                    <h1>Cộng đồng FrancAsie</h1>
+                    
+                    <!-- Events Section -->
+                    <div class="events-section">
+                        <h2>Sự kiện sắp tới</h2>
+                        <div id="events-grid" class="events-grid">
+                            <!-- Events will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Language Partners -->
+                    <div class="partners-section">
+                        <h2>Tìm bạn học</h2>
+                        <div id="partners-grid" class="partners-grid">
+                            <!-- Partners will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="mobile-nav">
+            <button data-page="dashboard" class="mobile-nav-item active">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                </svg>
+                <span>Trang chủ</span>
+            </button>
+            <button data-page="lessons" class="mobile-nav-item">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                </svg>
+                <span>Bài học</span>
+            </button>
+            <button data-page="ai-chat" class="mobile-nav-item">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4v3c0 .6.4 1 1 1h.5c.2 0 .5-.1.6-.2L14.1 18H20c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/>
+                </svg>
+                <span>AI Chat</span>
+            </button>
+            <button data-page="community" class="mobile-nav-item">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-1.1.9-2 2-2s2 .9 2 2V18h2v-4h3v4h4v2H0v-2h4z"/>
+                </svg>
+                <span>Cộng đồng</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-backdrop" class="modal-backdrop hidden">
+        <div id="call-modal" class="modal hidden">
+            <div class="modal-icon">📞</div>
+            <h3 id="caller-name">Cuộc gọi đến Pierre</h3>
+            <p id="call-status">Đang kết nối...</p>
+            <div class="modal-actions">
+                <button id="cancel-call" class="btn btn-secondary">Hủy</button>
+                <button id="accept-call" class="btn btn-success">Chấp nhận</button>
+            </div>
+        </div>
+
+        <div id="call-invitation-modal" class="modal hidden">
+            <img id="caller-avatar" src="" alt="Caller">
+            <h3 id="incoming-caller-name"></h3>
+            <p>muốn bắt đầu cuộc gọi video với bạn!</p>
+            <div class="modal-actions">
+                <button id="reject-call" class="btn btn-secondary">Từ chối</button>
+                <button id="accept-incoming-call" class="btn btn-success">Chấp nhận</button>
+            </div>
+        </div>
+
+        <div id="note-analysis-modal" class="modal large hidden">
+            <div class="modal-header">
+                <h3>✨ Phân tích & Sắp xếp Ghi chú</h3>
+                <button id="close-analysis-modal" class="close-btn">&times;</button>
+            </div>
+            <div id="note-analysis-content" class="modal-content">
+                <!-- Analysis content will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Pre-call Modal -->
+        <div id="pre-call-modal" class="modal pre-call-modal hidden">
+            <div class="modal-header">
+                <div class="modal-icon" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">📞</div>
+                <h3>Chuẩn bị cuộc gọi</h3>
+            </div>
+            <div class="pre-call-content">
+                <div class="pre-call-grid">
+                    <div class="pre-call-left">
+                        <div class="call-partner-info">
+                            <div class="partner-preview">
+                                <div id="pre-call-partner-avatar" class="partner-avatar-large">P</div>
+                                <div class="partner-details">
+                                    <h4 id="pre-call-partner-name">Pierre Dubois</h4>
+                                    <p id="pre-call-partner-location">Paris, France 🇫🇷</p>
+                                    <div class="partner-status online">
+                                        <div class="status-dot"></div>
+                                        <span>Đang online</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="call-info">
+                            <div class="info-item">
+                                <strong>💬 Chủ đề gợi ý:</strong>
+                                <p id="conversation-topic">Hãy nói về sở thích và hoạt động cuối tuần của bạn</p>
+                            </div>
+                            <div class="info-item">
+                                <strong>⏰ Thời lượng dự kiến:</strong>
+                                <p>30 phút - 1 giờ</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pre-call-right">
+                        <div class="call-checklist">
+                            <h4>✅ Kiểm tra trước khi gọi:</h4>
+                            <div class="checklist-items">
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-mic" checked>
+                                    <label for="check-mic">🎤 Mic tốt</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-camera" checked>
+                                    <label for="check-camera">📹 Camera rõ</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-internet" checked>
+                                    <label for="check-internet">🌐 Mạng ổn định</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check-quiet">
+                                    <label for="check-quiet">🔇 Không gian tĩnh</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions-centered">
+                <button id="cancel-pre-call" class="btn btn-secondary btn-large">Hủy</button>
+                <button id="confirm-call" class="btn btn-success btn-large">
+                    <svg class="btn-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
+                    </svg>
+                    Bắt đầu cuộc gọi
+                </button>
+            </div>
+        </div>
+
+        <!-- Calling Animation Modal -->
+        <div id="calling-modal" class="modal large hidden">
+            <div class="calling-content">
+                <div class="calling-avatar-container">
+                    <div id="calling-partner-avatar" class="calling-avatar">P</div>
+                    <div class="calling-rings">
+                        <div class="calling-ring ring-1"></div>
+                        <div class="calling-ring ring-2"></div>
+                        <div class="calling-ring ring-3"></div>
+                    </div>
+                </div>
+                
+                <div class="calling-info">
+                    <h3 id="calling-partner-name">Đang gọi Pierre Dubois...</h3>
+                    <p id="calling-status">📧 Đang gửi lời mời qua email</p>
+                </div>
+
+                <div class="calling-progress">
+                    <div class="progress-steps">
+                        <div class="step active">
+                            <div class="step-icon">📧</div>
+                            <span>Gửi lời mời</span>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">⏰</div>
+                            <span>Chờ phản hồi</span>
+                        </div>
+                        <div class="step">
+                            <div class="step-icon">🎥</div>
+                            <span>Kết nối</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calling-actions">
+                    <button id="cancel-calling" class="btn btn-secondary btn-large">
+                        Hủy cuộc gọi
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Registration Modal -->
+        <div id="event-registration-modal" class="modal hidden">
+            <div class="modal-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">📅</div>
+            <h3 id="event-modal-title">Đăng ký sự kiện</h3>
+            <p id="event-modal-description">Vui lòng điền thông tin để đăng ký tham gia sự kiện</p>
+            
+            <div class="event-registration-form">
+                <div class="form-group">
+                    <label class="form-label">Họ và tên *</label>
+                    <input type="text" id="event-participant-name" class="form-input" placeholder="Nhập họ tên của bạn" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" id="event-participant-email" class="form-input" placeholder="Nhập email của bạn" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Số điện thoại</label>
+                    <input type="tel" id="event-participant-phone" class="form-input" placeholder="Nhập số điện thoại (tùy chọn)">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Level hiện tại</label>
+                    <select id="event-participant-level" class="form-input">
+                        <option value="">-- Chọn level --</option>
+                        <option value="A1">A1 - Cơ bản</option>
+                        <option value="A2">A2 - Sơ cấp</option>
+                        <option value="B1">B1 - Trung bình</option>
+                        <option value="B2">B2 - Trung cao</option>
+                        <option value="C1">C1 - Nâng cao</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Ghi chú</label>
+                    <textarea id="event-participant-note" class="form-input" rows="3" placeholder="Có điều gì bạn muốn chia sẻ? (tùy chọn)"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-actions-centered">
+                <button id="close-event-modal" class="btn btn-secondary btn-large">Hủy</button>
+                <button id="submit-event-registration" class="btn btn-primary btn-large">
+                    <span id="event-submit-text">Đăng ký ngay</span>
+                    <div id="event-submit-spinner" class="spinner-sm hidden"></div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal hidden">
+            <div class="modal-icon" style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);">🔑</div>
+            <h3>Đăng nhập</h3>
+            <div class="login-form">
+                <div class="form-group">
+                    <label class="form-label">Tài khoản</label>
+                    <input type="text" id="demo-username" class="form-input" placeholder="Nhập tên tài khoản hoặc email">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mật khẩu</label>
+                    <input type="password" id="demo-password" class="form-input" placeholder="Nhập mật khẩu">
+                </div>
+            </div>
+            <div class="modal-actions-centered">
+                <button id="close-login-modal" class="btn btn-secondary btn-large">Đóng</button>
+                <button id="demo-login-submit" class="btn btn-primary btn-large">Đăng nhập</button>
+            </div>
+        </div>
+
+        <div id="already-registered-modal" class="modal hidden">
+            <div class="modal-icon" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">ℹ️</div>
+            <h3>Bạn đã có tài khoản</h3>
+            <p>Bạn đã đăng ký tài khoản thành công. Vui lòng đăng nhập để tiếp tục.</p>
+            <div class="modal-actions">
+                <button id="close-registered-modal" class="btn btn-secondary">Đóng</button>
+                <button id="login-from-modal" class="btn btn-primary">Đăng nhập</button>
+            </div>
+        </div>
+
+        <!-- Flashcards Modal -->
+        <div id="flashcards-section" class="modal large hidden" style="max-width: 32rem;">
+            <div class="flashcard-container">
+                <div id="flashcard" class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <div class="flashcard-icon">👋</div>
+                            <h2 class="flashcard-word">Bonjour</h2>
+                            <p class="flashcard-example">Bonjour madame, comment allez-vous?</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-icon">🇻🇳</div>
+                            <h2 class="flashcard-translation">Xin chào</h2>
+                            <p class="flashcard-meaning">(buổi sáng/chiều)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard-controls">
+                    <button id="prev-card" class="btn btn-secondary">← Trước</button>
+                    <span id="card-counter">1 / 5</span>
+                    <button id="next-card" class="btn btn-secondary">Tiếp →</button>
+                </div>
+                <div class="flashcard-actions">
+                    <button id="close-flashcards" class="btn btn-outline full-width">Đóng Flashcards</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div id="success-toast" class="toast hidden">
+        <div class="toast-icon">✅</div>
+        <div class="toast-content">
+            <h4 id="toast-title">Thành công!</h4>
+            <p id="toast-message">Đăng ký sự kiện thành công. Chúng tôi sẽ gửi thông tin chi tiết qua email.</p>
+        </div>
+        <button id="close-toast" class="toast-close">&times;</button>
+    </div>
+
+    <!-- Floating Notepad -->
+    <div id="floating-notepad" class="floating-notepad hidden">
+        <div class="notepad-header" id="notepad-header">📝 Sổ tay buổi học</div>
+        <div class="notepad-content">
+            <textarea id="notes-area" class="notepad-textarea" placeholder="Ghi chú những điều thú vị..."></textarea>
+            <div class="notepad-actions">
+                <button id="analyze-notes" class="btn btn-primary">✨ Phân tích AI</button>
+                <button id="close-notepad" class="btn btn-secondary">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Demo: Disabled) -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script> -->
+    
+    <!-- Google API Client (Demo: Disabled) -->
+    <!-- <script src="https://apis.google.com/js/api.js" async defer onload="gapiLoaded()"></script> -->
+    <!-- <script src="https://accounts.google.com/gsi/client" async defer onload="gisLoaded()"></script> -->
+
+    <!-- App Scripts -->
+    <script src="config.js"></script>
+    <script src="content.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
