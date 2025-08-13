@@ -972,6 +972,11 @@ setupEventListeners() {
             console.log("🔓 Modal lock reset - hideAllModals");
         }
     }
+    
+    forceResetModalLock() {
+        this.modalLock = false;
+        console.log("🔓 Modal lock FORCE RESET");
+    }
 
     updateUserInfo(user) {
         if (this.dom.userName) {
@@ -1123,6 +1128,14 @@ setupEventListeners() {
         // Show modal
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.eventRegistrationModal?.classList.remove('hidden');
+        
+        // Force override inline styles that hideAllModals() sets
+        if (this.dom.eventRegistrationModal) {
+            this.dom.eventRegistrationModal.style.display = 'flex';
+        }
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.style.display = 'flex';
+        }
     }
 
     hideEventRegistrationModal() {
@@ -1292,6 +1305,13 @@ async startVideoCall() {
         console.log("🎯 this.currentCallInfo:", this.currentCallInfo);
         console.log("🎯 this.dom.preCallModal:", this.dom.preCallModal);
         
+        // Force hide login modal explicitly
+        if (this.dom.loginModal) {
+            this.dom.loginModal.classList.add('hidden');
+            this.dom.loginModal.style.display = 'none';
+            console.log("🎯 Forced login modal to hide");
+        }
+        
         const { email, partnerName } = this.currentCallInfo;
         
         // Update partner info in modal
@@ -1346,6 +1366,14 @@ async startVideoCall() {
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.preCallModal?.classList.remove('hidden');
         
+        // Force override inline styles that hideAllModals() sets
+        if (this.dom.preCallModal) {
+            this.dom.preCallModal.style.display = 'flex';
+        }
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.style.display = 'flex';
+        }
+        
         console.log("🎯 Pre-call modal should now be visible");
     }
 
@@ -1354,9 +1382,9 @@ async startVideoCall() {
         this.dom.modalBackdrop?.classList.add('hidden');
         this.currentCallInfo = null;
         
-        // Release modal lock when hiding pre-call modal
+        // Force reset modal lock regardless of current state
         this.modalLock = false;
-        console.log("🔓 Modal lock released - hidePreCallModal");
+        console.log("🔓 Modal lock force released - hidePreCallModal");
     }
 
     async proceedWithVideoCall() {
@@ -1441,6 +1469,14 @@ async startVideoCall() {
         // Show calling modal
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.callingModal?.classList.remove('hidden');
+        
+        // Force override inline styles that hideAllModals() sets
+        if (this.dom.callingModal) {
+            this.dom.callingModal.style.display = 'flex';
+        }
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.style.display = 'flex';
+        }
         
         // Simulate calling progress
         this.simulateCallingProgress();
@@ -2574,7 +2610,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         
-        console.log("🧪 Debug: Type 'testFlashcards()' or 'testLessonClick()' in console to test");
+        // Add global debug for resetting modal state
+        window.resetModals = () => {
+            console.log("🧪 Resetting modal state...");
+            app.hideAllModals();
+            app.forceResetModalLock();
+            console.log("✅ Modal state reset complete");
+        };
+        
+        // Add global debug for checking modal state
+        window.checkModalState = () => {
+            console.log("🧪 Modal state check:");
+            console.log("- modalLock:", app.modalLock);
+            console.log("- loginModal hidden:", app.dom.loginModal?.classList.contains('hidden'));
+            console.log("- preCallModal hidden:", app.dom.preCallModal?.classList.contains('hidden'));
+            console.log("- callingModal hidden:", app.dom.callingModal?.classList.contains('hidden'));
+            console.log("- modalBackdrop hidden:", app.dom.modalBackdrop?.classList.contains('hidden'));
+        };
+        
+        console.log("🧪 Debug functions: testFlashcards(), testLessonClick(), resetModals(), checkModalState()");
         
     } catch (error) {
         console.error("❌ App initialization failed:", error);
