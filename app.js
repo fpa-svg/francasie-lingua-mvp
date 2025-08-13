@@ -647,6 +647,14 @@ setupEventListeners() {
     console.log("🔧 Login button element:", this.dom.loginBtn);
     console.log("🔧 Register button element:", this.dom.registerBtn);
     
+    // Debug DOM elements
+    if (!this.dom.loginBtn) {
+        console.error("❌ Login button not found! ID: login-btn");
+    }
+    if (!this.dom.registerBtn) {
+        console.error("❌ Register button not found! ID: register-btn");
+    }
+    
     // Auth buttons - demo version
     this.dom.loginBtn?.addEventListener('click', (e) => {
         e.preventDefault();
@@ -687,7 +695,7 @@ setupEventListeners() {
         
         // Prevent multiple modals from opening
         if (this.modalLock) {
-            console.log("🔒 Modal already in progress, ignoring register");
+            console.log(`🔒 Modal already in progress (${this.modalLock}), ignoring register`);
             return;
         }
         
