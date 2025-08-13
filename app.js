@@ -1167,8 +1167,13 @@ async startVideoCall() {
         await new Promise(resolve => setTimeout(resolve, 100));
     
     const email = this.dom.partnerEmail?.value.trim().toLowerCase();
+    console.log("🔍 Partner email element:", this.dom.partnerEmail);
+    console.log("🔍 Partner email value:", email);
+    
     if (!email) {
+        console.log("❌ No email provided - should show input modal first");
         alert("Vui lòng nhập email của người bạn muốn gọi.");
+        this.modalLock = false; // Release lock
         return;
     }
     

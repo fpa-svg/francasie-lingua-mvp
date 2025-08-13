@@ -1512,6 +1512,48 @@ p { margin-bottom: 1rem; }
     color: #9ca3af;
 }
 
+/* Login Modal Layout Fix */
+#login-modal {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    max-width: 400px !important;
+    width: 90% !important;
+}
+
+#login-modal .modal-icon {
+    margin: 0 auto 1rem !important;
+}
+
+#login-modal .login-form {
+    width: 100% !important;
+    text-align: left !important;
+}
+
+#login-modal .form-group {
+    margin-bottom: 1rem !important;
+}
+
+#login-modal .form-label {
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    text-align: left !important;
+}
+
+#login-modal .form-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#login-modal .modal-actions-centered {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+    width: 100% !important;
+    margin-top: 1.5rem !important;
+}
+
 /* AI Topics Grid */
 .ai-topic-section {
     width: 100%;
