@@ -930,12 +930,13 @@ setupEventListeners() {
     }
 
     hideAllModals() {
-        // Hide modal backdrop
+        // Force hide modal backdrop
         if (this.dom.modalBackdrop) {
             this.dom.modalBackdrop.classList.add('hidden');
+            this.dom.modalBackdrop.classList.remove('show');
         }
         
-        // Hide all individual modals
+        // Hide all individual modals with forced styling
         const modals = [
             this.dom.callModal,
             this.dom.callInvitationModal,
@@ -952,6 +953,7 @@ setupEventListeners() {
         modals.forEach(modal => {
             if (modal) {
                 modal.classList.add('hidden');
+                modal.style.display = 'none'; // Force hide on mobile
             }
         });
         
