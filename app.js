@@ -972,11 +972,6 @@ setupEventListeners() {
             console.log("🔓 Modal lock reset - hideAllModals");
         }
     }
-    
-    forceResetModalLock() {
-        this.modalLock = false;
-        console.log("🔓 Modal lock FORCE RESET");
-    }
 
     updateUserInfo(user) {
         if (this.dom.userName) {
@@ -1263,7 +1258,6 @@ async startVideoCall() {
         partnerName: this.getPartnerNameFromEmail(email)
     };
     
-    console.log("🎯 About to call showPreCallModal()");
     this.showPreCallModal();
 }
 
@@ -1301,15 +1295,20 @@ async startVideoCall() {
     }
 
     async showPreCallModal() {
-        console.log("🎯 showPreCallModal() called");
-        console.log("🎯 this.currentCallInfo:", this.currentCallInfo);
-        console.log("🎯 this.dom.preCallModal:", this.dom.preCallModal);
+        // Force hide ALL other modals explicitly before showing pre-call modal
+        this.hideAllModals();
         
-        // Force hide login modal explicitly
+        // Extra force hide for problematic modals
         if (this.dom.loginModal) {
             this.dom.loginModal.classList.add('hidden');
-            this.dom.loginModal.style.display = 'none';
-            console.log("🎯 Forced login modal to hide");
+            this.dom.loginModal.style.display = 'none !important';
+            this.dom.loginModal.style.visibility = 'hidden';
+        }
+        
+        // Force hide modal backdrop from any previous modal
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.classList.add('hidden');
+            this.dom.modalBackdrop.style.display = 'none';
         }
         
         const { email, partnerName } = this.currentCallInfo;
@@ -1359,10 +1358,6 @@ async startVideoCall() {
         }
         
         // Show modal
-        console.log("🎯 About to show pre-call modal");
-        console.log("🎯 modalBackdrop:", this.dom.modalBackdrop);
-        console.log("🎯 preCallModal:", this.dom.preCallModal);
-        
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.preCallModal?.classList.remove('hidden');
         
@@ -1373,8 +1368,6 @@ async startVideoCall() {
         if (this.dom.modalBackdrop) {
             this.dom.modalBackdrop.style.display = 'flex';
         }
-        
-        console.log("🎯 Pre-call modal should now be visible");
     }
 
     hidePreCallModal() {
@@ -2610,25 +2603,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
         
-        // Add global debug for resetting modal state
-        window.resetModals = () => {
-            console.log("🧪 Resetting modal state...");
-            app.hideAllModals();
-            app.forceResetModalLock();
-            console.log("✅ Modal state reset complete");
-        };
-        
-        // Add global debug for checking modal state
-        window.checkModalState = () => {
-            console.log("🧪 Modal state check:");
-            console.log("- modalLock:", app.modalLock);
-            console.log("- loginModal hidden:", app.dom.loginModal?.classList.contains('hidden'));
-            console.log("- preCallModal hidden:", app.dom.preCallModal?.classList.contains('hidden'));
-            console.log("- callingModal hidden:", app.dom.callingModal?.classList.contains('hidden'));
-            console.log("- modalBackdrop hidden:", app.dom.modalBackdrop?.classList.contains('hidden'));
-        };
-        
-        console.log("🧪 Debug functions: testFlashcards(), testLessonClick(), resetModals(), checkModalState()");
         
     } catch (error) {
         console.error("❌ App initialization failed:", error);
