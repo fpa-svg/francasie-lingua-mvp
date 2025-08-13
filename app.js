@@ -1102,7 +1102,13 @@ setupEventListeners() {
         // Show modal with proper classes
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.modalBackdrop?.classList.add('show');
-        this.dom.loginModal?.classList.remove('hidden');
+        
+        // Show login modal with forced display override
+        if (this.dom.loginModal) {
+            this.dom.loginModal.classList.remove('hidden');
+            this.dom.loginModal.style.display = 'flex'; // Override display:none from hideAllModals
+        }
+        
         this.dom.demoUsername?.focus();
         
         console.log("✅ Login modal should now be visible");
