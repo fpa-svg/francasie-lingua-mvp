@@ -863,28 +863,28 @@ setupEventListeners() {
 
     // Backup: Document level event listeners
     document.addEventListener('click', (e) => {
-        if (e.target.closest('.flashcard-container')) {
+        if (e.target && e.target.closest && e.target.closest('.flashcard-container')) {
             const target = e.target;
             
-            if (target.id === 'flashcard' || target.closest('#flashcard')) {
+            if (target.id === 'flashcard' || (target.closest && target.closest('#flashcard'))) {
                 e.preventDefault();
                 console.log("🔄 Document level flashcard flip");
                 this.flipFlashcard();
             }
             
-            if (target.id === 'prev-card' || target.closest('#prev-card')) {
+            if (target.id === 'prev-card' || (target.closest && target.closest('#prev-card'))) {
                 e.preventDefault();
                 console.log("⬅️ Document level previous");
                 this.previousFlashcard();
             }
             
-            if (target.id === 'next-card' || target.closest('#next-card')) {
+            if (target.id === 'next-card' || (target.closest && target.closest('#next-card'))) {
                 e.preventDefault();
                 console.log("➡️ Document level next");
                 this.nextFlashcard();
             }
             
-            if (target.id === 'close-flashcards' || target.closest('#close-flashcards')) {
+            if (target.id === 'close-flashcards' || (target.closest && target.closest('#close-flashcards'))) {
                 e.preventDefault();
                 console.log("❌ Document level close");
                 this.hideFlashcards();
@@ -1231,11 +1231,15 @@ async startVideoCall() {
     
     if (email === currentUser?.email) {
         alert("Bạn không thể tự gọi cho chính mình.");
+        this.modalLock = false; // Release lock
+        console.log("🔓 Modal lock released - self call attempt");
         return;
     }
 
     if (!currentUser) {
         alert("Bạn cần đăng nhập để sử dụng tính năng này.");
+        this.modalLock = false; // Release lock
+        console.log("🔓 Modal lock released - user not logged in");
         return;
     }
 
@@ -1379,6 +1383,10 @@ async startVideoCall() {
                 window.open(meetLink, '_blank');
                 this.showNotepad();
             }
+            
+            // Always reset modal lock after user decision
+            this.modalLock = false;
+            console.log("🔓 Modal lock released - after user decision");
                 
         } catch (error) {
             console.error("Error starting call:", error);
@@ -1874,8 +1882,8 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
         cardTouchStartTime = now;
         
         // Prevent lesson card clicks when other modals might be opening
-        if (e.target.closest('#start-video-call') || 
-            e.target.closest('.action-card') || 
+        if ((e.target && e.target.closest && e.target.closest('#start-video-call')) || 
+            (e.target && e.target.closest && e.target.closest('.action-card')) || 
             e.target.id === 'start-video-call') {
             console.log("🚫 Ignoring lesson card click - video call button clicked");
             return;
