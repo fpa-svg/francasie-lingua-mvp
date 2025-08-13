@@ -1368,6 +1368,30 @@ async startVideoCall() {
         if (this.dom.modalBackdrop) {
             this.dom.modalBackdrop.style.display = 'flex';
         }
+        
+        // Debug CSS styles
+        setTimeout(() => {
+            console.log("🎯 PRE-CALL MODAL CSS DEBUG:");
+            if (this.dom.preCallModal) {
+                const computedStyle = window.getComputedStyle(this.dom.preCallModal);
+                console.log("- display:", computedStyle.display);
+                console.log("- visibility:", computedStyle.visibility);
+                console.log("- position:", computedStyle.position);
+                console.log("- z-index:", computedStyle.zIndex);
+                console.log("- classList:", this.dom.preCallModal.classList.toString());
+                console.log("- style attr:", this.dom.preCallModal.style.cssText);
+            }
+            
+            // Check for login modal interference
+            if (this.dom.loginModal) {
+                const loginComputedStyle = window.getComputedStyle(this.dom.loginModal);
+                console.log("🎯 LOGIN MODAL CSS DEBUG:");
+                console.log("- display:", loginComputedStyle.display);
+                console.log("- visibility:", loginComputedStyle.visibility);
+                console.log("- classList:", this.dom.loginModal.classList.toString());
+                console.log("- style attr:", this.dom.loginModal.style.cssText);
+            }
+        }, 100);
     }
 
     hidePreCallModal() {
@@ -1980,8 +2004,29 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
         // Set flashcard lock
         this.modalLock = 'flashcards';
         
+        // Debug: Check if login modal is showing
+        console.log("🎯 FLASHCARD DEBUG - Modal states BEFORE hideAllModals:");
+        if (this.dom.loginModal) {
+            const loginStyle = window.getComputedStyle(this.dom.loginModal);
+            console.log("- Login modal display:", loginStyle.display);
+            console.log("- Login modal visibility:", loginStyle.visibility);
+            console.log("- Login modal classList:", this.dom.loginModal.classList.toString());
+        }
+        
         // Hide any open modals first
         this.hideAllModals();
+        
+        // Debug: Check if login modal is STILL showing
+        setTimeout(() => {
+            console.log("🎯 FLASHCARD DEBUG - Modal states AFTER hideAllModals:");
+            if (this.dom.loginModal) {
+                const loginStyle = window.getComputedStyle(this.dom.loginModal);
+                console.log("- Login modal display:", loginStyle.display);
+                console.log("- Login modal visibility:", loginStyle.visibility);
+                console.log("- Login modal classList:", this.dom.loginModal.classList.toString());
+                console.log("- Login modal style attr:", this.dom.loginModal.style.cssText);
+            }
+        }, 50);
         
         console.log("🚀 Starting simple flashcards");
         
