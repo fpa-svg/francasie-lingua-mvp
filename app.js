@@ -1139,6 +1139,7 @@ setupEventListeners() {
     // Demo login modal methods
     showLoginModal() {
         console.log("🎯 showLoginModal() called");
+        console.log("🎯 Call stack:", new Error().stack);
         console.log("🎯 loginModal element:", this.dom.loginModal);
         console.log("🎯 modalBackdrop element:", this.dom.modalBackdrop);
         
@@ -1249,6 +1250,7 @@ async startVideoCall() {
         partnerName: this.getPartnerNameFromEmail(email)
     };
     
+    console.log("🎯 About to call showPreCallModal()");
     this.showPreCallModal();
 }
 
@@ -1286,6 +1288,10 @@ async startVideoCall() {
     }
 
     async showPreCallModal() {
+        console.log("🎯 showPreCallModal() called");
+        console.log("🎯 this.currentCallInfo:", this.currentCallInfo);
+        console.log("🎯 this.dom.preCallModal:", this.dom.preCallModal);
+        
         const { email, partnerName } = this.currentCallInfo;
         
         // Update partner info in modal
@@ -1333,8 +1339,14 @@ async startVideoCall() {
         }
         
         // Show modal
+        console.log("🎯 About to show pre-call modal");
+        console.log("🎯 modalBackdrop:", this.dom.modalBackdrop);
+        console.log("🎯 preCallModal:", this.dom.preCallModal);
+        
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.preCallModal?.classList.remove('hidden');
+        
+        console.log("🎯 Pre-call modal should now be visible");
     }
 
     hidePreCallModal() {
