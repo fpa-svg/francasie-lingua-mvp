@@ -3627,3 +3627,56 @@ p { margin-bottom: 1rem; }
     z-index: 99999 !important; /* Higher than everything */
     padding: 1rem;
 }
+
+/* ===== MODAL POSITIONING FIX - CSS OVERRIDE APPROACH ===== */
+.modal.show {
+    position: fixed !important;
+    z-index: 1000 !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.modal-backdrop.show {
+    z-index: 999 !important;
+    display: flex !important;
+}
+
+/* SOLUTION 2: Pre-call modal size constraints
+.modal.pre-call-modal.show {
+    max-width: min(32rem, 90vw) !important;
+    max-height: min(80vh, 600px) !important;
+    width: auto !important;
+    overflow-y: auto !important;
+} */
+
+/* SOLUTION 1: Ensure pre-call modal fits content and screen */
+.modal.pre-call-modal.show {
+    max-width: min(32rem, 90vw) !important;
+    max-height: min(85vh, 600px) !important; /* Increased max-height to 85vh */
+    width: auto !important;
+    height: auto !important; /* Allow dynamic height */
+    overflow-y: auto !important; /* Enable scrolling if content overflows */
+    display: flex !important; /* Ensure flex is enforced */
+    flex-direction: column !important; /* Stack children vertically */
+}
+
+
+
+/* Mobile responsive adjustments for modal positioning */
+@media (max-width: 768px) {
+    .modal.show {
+        top: 10px !important;
+        left: 10px !important;
+        right: 10px !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: auto !important;
+        max-width: calc(100vw - 20px) !important;
+        max-height: calc(100vh - 20px) !important;
+        overflow-y: auto !important;
+    }
+}
+
+
+

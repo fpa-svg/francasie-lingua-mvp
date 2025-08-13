@@ -770,7 +770,12 @@ setupEventListeners() {
     this.dom.closeAnalysisModal?.addEventListener('click', () => this.hideNoteAnalysisModal());
 
     // Pre-call modal actions
-    this.dom.cancelPreCall?.addEventListener('click', () => this.hidePreCallModal());
+    this.dom.cancelPreCall?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation(); // SOLUTION 3: Stronger event stopping
+        console.log("🔍 Cancel pre-call clicked");
+        this.hidePreCallModal();
+    });
     this.dom.confirmCall?.addEventListener('click', () => this.proceedWithVideoCall());
 
     // Calling modal actions
@@ -855,7 +860,40 @@ setupEventListeners() {
             closeFlashcards.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // 🔍 EXTENSIVE DEBUG LOGGING - FLASHCARD CLOSE
+                console.log("🔍 === FLASHCARD CLOSE EVENT DEBUG ===");
+                console.log("🔍 Event object:", e);
+                console.log("🔍 Target element:", e.target);
+                console.log("🔍 CurrentTarget:", e.currentTarget);
+                console.log("🔍 Target tagName:", e.target.tagName);
+                console.log("🔍 Target id:", e.target.id);
+                console.log("🔍 Target classList:", e.target.classList.toString());
+                console.log("🔍 Event type:", e.type);
+                console.log("🔍 Event bubbles:", e.bubbles);
+                console.log("🔍 Event cancelable:", e.cancelable);
+                console.log("🔍 Event timeStamp:", e.timeStamp);
+                
+                // Track parent elements
+                let parent = e.target.parentElement;
+                let parentChain = [];
+                while (parent && parentChain.length < 5) {
+                    parentChain.push({
+                        tagName: parent.tagName,
+                        id: parent.id,
+                        classList: parent.classList.toString()
+                    });
+                    parent = parent.parentElement;
+                }
+                console.log("🔍 Parent chain:", parentChain);
+                
+                // Check if any lesson card handlers are active
+                const lessonCards = document.querySelectorAll('.lesson-card');
+                console.log("🔍 Active lesson cards:", lessonCards.length);
+                
                 console.log("❌ Close flashcards clicked");
+                console.log("🔍 === END FLASHCARD CLOSE DEBUG ===");
+                
                 this.hideFlashcards();
             });
         }
@@ -863,6 +901,14 @@ setupEventListeners() {
 
     // Backup: Document level event listeners
     document.addEventListener('click', (e) => {
+        // 🔍 GLOBAL CLICK TRACKING
+        if (e.target && e.target.closest && e.target.closest('.flashcard-container')) {
+            console.log("🔍 === GLOBAL FLASHCARD CONTAINER CLICK ===");
+            console.log("🔍 Global click target:", e.target);
+            console.log("🔍 Global click timeStamp:", e.timeStamp);
+            console.log("🔍 Closest flashcard-container:", e.target.closest('.flashcard-container'));
+        }
+        
         if (e.target && e.target.closest && e.target.closest('.flashcard-container')) {
             const target = e.target;
             
@@ -886,7 +932,15 @@ setupEventListeners() {
             
             if (target.id === 'close-flashcards' || (target.closest && target.closest('#close-flashcards'))) {
                 e.preventDefault();
+                
+                // 🔍 DOCUMENT LEVEL CLOSE DEBUG
+                console.log("🔍 === DOCUMENT LEVEL CLOSE DEBUG ===");
+                console.log("🔍 Document event target:", target);
+                console.log("🔍 Document event type:", e.type);
+                console.log("🔍 Document timeStamp:", e.timeStamp);
                 console.log("❌ Document level close");
+                console.log("🔍 === END DOCUMENT CLOSE DEBUG ===");
+                
                 this.hideFlashcards();
             }
         }
@@ -946,11 +1000,9 @@ setupEventListeners() {
         
         // Force hide modal backdrop
         if (this.dom.modalBackdrop) {
-            console.log("🎯 HIDING BACKDROP - Before:", this.dom.modalBackdrop.style.cssText);
             this.dom.modalBackdrop.classList.add('hidden');
             this.dom.modalBackdrop.classList.remove('show');
             this.dom.modalBackdrop.style.display = 'none'; // Extra force
-            console.log("🎯 HIDING BACKDROP - After:", this.dom.modalBackdrop.style.cssText);
         }
         
         // Hide all individual modals with forced styling
@@ -970,12 +1022,14 @@ setupEventListeners() {
         modals.forEach(modal => {
             if (modal) {
                 modal.classList.add('hidden');
+                modal.classList.remove('show'); // Remove CSS Override class
                 modal.style.display = 'none'; // Force hide on mobile
                 modal.style.visibility = 'hidden'; // Extra force hide
                 
                 // Debug specific for login modal
                 if (modal === this.dom.loginModal) {
-                    console.log("🎯 Setting login modal to hidden - style.display set to 'none'");
+                    console.log("🎯 HIDEALLMODALS - Setting login modal visibility to 'hidden'");
+                    console.log("🎯 HIDEALLMODALS - Call stack:", new Error().stack);
                 }
             }
         });
@@ -1174,6 +1228,25 @@ setupEventListeners() {
         console.log("🎯 loginModal element:", this.dom.loginModal);
         console.log("🎯 modalBackdrop element:", this.dom.modalBackdrop);
         
+        // Add MutationObserver to track style changes
+        if (this.dom.loginModal && !this.loginModalObserver) {
+            console.log("🔍 Setting up MutationObserver for loginModal style changes");
+            this.loginModalObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        console.log("🔍 STYLE CHANGED on loginModal:", this.dom.loginModal.style.cssText);
+                        console.log("🔍 visibility:", this.dom.loginModal.style.visibility);
+                        console.log("🔍 display:", this.dom.loginModal.style.display);
+                        console.log("🔍 Change stack:", new Error().stack);
+                    }
+                });
+            });
+            this.loginModalObserver.observe(this.dom.loginModal, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        }
+        
         // Mobile safety check - prevent rapid calls
         if (this.dom.loginModal && !this.dom.loginModal.classList.contains('hidden')) {
             console.log("🔒 Login modal already visible, ignoring");
@@ -1184,18 +1257,22 @@ setupEventListeners() {
         this.hideAllModals();
         
         // Show modal with proper classes
-        console.log("🎯 BEFORE showing backdrop - backdrop style:", this.dom.modalBackdrop?.style.cssText);
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.modalBackdrop?.classList.add('show');
-        console.log("🎯 AFTER showing backdrop - backdrop style:", this.dom.modalBackdrop?.style.cssText);
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.style.display = 'flex'; // Override display:none from hideAllModals
+            console.log("🎯 Setting backdrop display to flex");
+        }
         
-        // Show login modal with forced display override
+        // Show login modal with CSS Override approach
         if (this.dom.loginModal) {
-            console.log("🎯 BEFORE showing login modal - modal style:", this.dom.loginModal.style.cssText);
+            console.log("🎯 BEFORE removing hidden class - visibility:", this.dom.loginModal.style.visibility);
             this.dom.loginModal.classList.remove('hidden');
+            this.dom.loginModal.classList.add('show'); // Add 'show' class for CSS override positioning
+            console.log("🎯 AFTER removing hidden class - visibility:", this.dom.loginModal.style.visibility);
             this.dom.loginModal.style.display = 'flex'; // Override display:none from hideAllModals
-            console.log("🎯 LOGIN MODAL DISPLAY SET TO FLEX - FROM showLoginModal()");
-            console.log("🎯 AFTER showing login modal - modal style:", this.dom.loginModal.style.cssText);
+            this.dom.loginModal.style.visibility = 'visible'; // Override visibility:hidden from hideAllModals
+            console.log("🎯 AFTER setting display flex and visibility - visibility:", this.dom.loginModal.style.visibility);
         }
         
         // Check if backdrop is actually visible
@@ -1213,9 +1290,20 @@ setupEventListeners() {
     }
     
     hideLoginModal() {
-        this.dom.loginModal?.classList.add('hidden');
-        this.dom.modalBackdrop?.classList.add('hidden');
-        this.dom.modalBackdrop?.classList.remove('show');
+        // Reset inline styles that prevent hiding
+        if (this.dom.loginModal) {
+            this.dom.loginModal.classList.add('hidden');
+            this.dom.loginModal.classList.remove('show'); // Remove CSS Override class
+            this.dom.loginModal.style.display = ''; // Reset inline style
+            this.dom.loginModal.style.visibility = ''; // Reset inline style
+        }
+        
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.classList.add('hidden');
+            this.dom.modalBackdrop.classList.remove('show');
+            this.dom.modalBackdrop.style.display = ''; // Reset inline style
+        }
+        
         if (this.dom.demoUsername) this.dom.demoUsername.value = '';
         if (this.dom.demoPassword) this.dom.demoPassword.value = '';
         
@@ -1394,20 +1482,82 @@ async startVideoCall() {
             this.dom.conversationTopic.textContent = topic;
         }
         
-        // Show modal
+        // Show modal with CSS Override approach
         this.dom.modalBackdrop?.classList.remove('hidden');
+        this.dom.modalBackdrop?.classList.add('show'); // Add 'show' class for CSS override
         this.dom.preCallModal?.classList.remove('hidden');
+        this.dom.preCallModal?.classList.add('show'); // Add 'show' class for CSS override positioning
         
         // Force override inline styles that hideAllModals() sets
         if (this.dom.preCallModal) {
             this.dom.preCallModal.style.display = 'flex';
+            this.dom.preCallModal.style.visibility = 'visible'; // Override visibility:hidden from hideAllModals
         }
         if (this.dom.modalBackdrop) {
             this.dom.modalBackdrop.style.display = 'flex';
         }
         
-        // Debug CSS styles
+        // 🔍 EXTENSIVE VIDEO CALL MODAL DEBUG
         setTimeout(() => {
+            console.log("🔍 === VIDEO CALL MODAL DEBUG START ===");
+            console.log("🔍 Pre-call modal element:", this.dom.preCallModal);
+            console.log("🔍 Modal backdrop element:", this.dom.modalBackdrop);
+            
+            if (this.dom.preCallModal) {
+                const computedStyle = window.getComputedStyle(this.dom.preCallModal);
+                const rect = this.dom.preCallModal.getBoundingClientRect();
+                
+                console.log("🔍 DETAILED PRE-CALL MODAL CSS:");
+                console.log("🔍 Element classList:", this.dom.preCallModal.classList.toString());
+                console.log("🔍 Element style attr:", this.dom.preCallModal.style.cssText);
+                console.log("🔍 Element ID:", this.dom.preCallModal.id);
+                console.log("🔍 Element tagName:", this.dom.preCallModal.tagName);
+                
+                console.log("🔍 COMPUTED STYLES:");
+                console.log("🔍 position:", computedStyle.position);
+                console.log("🔍 display:", computedStyle.display);
+                console.log("🔍 visibility:", computedStyle.visibility);
+                console.log("🔍 z-index:", computedStyle.zIndex);
+                console.log("🔍 top:", computedStyle.top);
+                console.log("🔍 left:", computedStyle.left);
+                console.log("🔍 transform:", computedStyle.transform);
+                console.log("🔍 width:", computedStyle.width);
+                console.log("🔍 height:", computedStyle.height);
+                console.log("🔍 max-width:", computedStyle.maxWidth);
+                console.log("🔍 max-height:", computedStyle.maxHeight);
+                
+                console.log("🔍 BOUNDING RECT:");
+                console.log("🔍 rect:", rect);
+                console.log("🔍 rect.top:", rect.top);
+                console.log("🔍 rect.left:", rect.left);
+                console.log("🔍 rect.width:", rect.width);
+                console.log("🔍 rect.height:", rect.height);
+                
+                console.log("🔍 ELEMENT PROPERTIES:");
+                console.log("🔍 offsetParent:", this.dom.preCallModal.offsetParent);
+                console.log("🔍 offsetTop:", this.dom.preCallModal.offsetTop);
+                console.log("🔍 offsetLeft:", this.dom.preCallModal.offsetLeft);
+                console.log("🔍 clientHeight:", this.dom.preCallModal.clientHeight);
+                console.log("🔍 scrollHeight:", this.dom.preCallModal.scrollHeight);
+                
+                // Check parent elements
+                let parent = this.dom.preCallModal.parentElement;
+                let parentInfo = [];
+                while (parent && parentInfo.length < 3) {
+                    const parentStyle = window.getComputedStyle(parent);
+                    parentInfo.push({
+                        tagName: parent.tagName,
+                        id: parent.id,
+                        classList: parent.classList.toString(),
+                        position: parentStyle.position,
+                        display: parentStyle.display,
+                        zIndex: parentStyle.zIndex
+                    });
+                    parent = parent.parentElement;
+                }
+                console.log("🔍 Parent chain:", parentInfo);
+            }
+            
             console.log("🎯 PRE-CALL MODAL CSS DEBUG:");
             if (this.dom.preCallModal) {
                 const computedStyle = window.getComputedStyle(this.dom.preCallModal);
@@ -1417,6 +1567,21 @@ async startVideoCall() {
                 console.log("- z-index:", computedStyle.zIndex);
                 console.log("- classList:", this.dom.preCallModal.classList.toString());
                 console.log("- style attr:", this.dom.preCallModal.style.cssText);
+                console.log("- offsetParent:", this.dom.preCallModal.offsetParent);
+                console.log("- clientHeight:", this.dom.preCallModal.clientHeight);
+                console.log("- scrollHeight:", this.dom.preCallModal.scrollHeight);
+            }
+            
+            // Debug backdrop
+            if (this.dom.modalBackdrop) {
+                const backdropStyle = window.getComputedStyle(this.dom.modalBackdrop);
+                console.log("🎯 BACKDROP CSS DEBUG:");
+                console.log("- display:", backdropStyle.display);
+                console.log("- visibility:", backdropStyle.visibility);
+                console.log("- z-index:", backdropStyle.zIndex);
+                console.log("- position:", backdropStyle.position);
+                console.log("- classList:", this.dom.modalBackdrop.classList.toString());
+                console.log("- style attr:", this.dom.modalBackdrop.style.cssText);
             }
             
             // Check for login modal interference
@@ -1431,15 +1596,46 @@ async startVideoCall() {
         }, 100);
     }
 
-    hidePreCallModal() {
-        this.dom.preCallModal?.classList.add('hidden');
-        this.dom.modalBackdrop?.classList.add('hidden');
-        this.currentCallInfo = null;
+    // hidePreCallModal() {
+    //     this.dom.preCallModal?.classList.add('hidden');
+    //     this.dom.modalBackdrop?.classList.add('hidden');
+    //     this.currentCallInfo = null;
         
-        // Force reset modal lock regardless of current state
-        this.modalLock = false;
-        console.log("🔓 Modal lock force released - hidePreCallModal");
+    //     // Force reset modal lock regardless of current state
+    //     this.modalLock = false;
+    //     console.log("🔓 Modal lock force released - hidePreCallModal");
+    // }
+
+//     hidePreCallModal() {
+//     console.log('🔍 Hiding pre-call modal...');
+//     this.isModalLocked = false; // Giải phóng khóa nếu có
+//     this.dom.preCallModal.classList.remove('show');
+//     this.dom.preCallModal.style.display = 'none';
+//     this.dom.preCallModal.style.visibility = 'hidden';
+//     this.dom.modalBackdrop.classList.remove('show');
+//     this.dom.modalBackdrop.style.display = 'none';
+//     this.dom.modalBackdrop.style.visibility = 'hidden';
+//     console.log('🔓 Pre-call modal hidden successfully');
+// }
+
+hidePreCallModal() {
+    console.log('🔍 Hiding pre-call modal...');
+    if (this.dom.preCallModal) {
+        this.dom.preCallModal.classList.remove('show');
+        this.dom.preCallModal.classList.add('hidden');
+        this.dom.preCallModal.style.display = 'none';
+        this.dom.preCallModal.style.visibility = 'hidden';
     }
+    if (this.dom.modalBackdrop) {
+        this.dom.modalBackdrop.classList.remove('show');
+        this.dom.modalBackdrop.classList.add('hidden');
+        this.dom.modalBackdrop.style.display = 'none';
+        this.dom.modalBackdrop.style.visibility = 'hidden';
+    }
+    this.modalLock = false; // Đặt lại khóa modal
+    this.currentCallInfo = null; // Xóa thông tin cuộc gọi hiện tại
+    console.log('🔓 Pre-call modal hidden successfully');
+}
 
     async proceedWithVideoCall() {
         if (!this.currentCallInfo) return;
@@ -1999,6 +2195,16 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
         
         console.log("🎯 Lesson card clicked:", lesson.title);
         
+        // 🔍 LESSON CARD CLICK DEBUG
+        console.log("🔍 === LESSON CARD CLICK DEBUG ===");
+        console.log("🔍 Lesson card clicked at:", new Date().toISOString());
+        console.log("🔍 Modal lock status:", this.modalLock);
+        console.log("🔍 Current flashcard status:", {
+            section: document.getElementById('flashcards-section'),
+            hidden: document.getElementById('flashcards-section')?.classList.contains('hidden')
+        });
+        console.log("🔍 === END LESSON CARD DEBUG ===");
+        
         // Start simple flashcards
         this.startFlashcards();
     });
@@ -2063,6 +2269,19 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
                 console.log("- Login modal classList:", this.dom.loginModal.classList.toString());
                 console.log("- Login modal style attr:", this.dom.loginModal.style.cssText);
             }
+            
+            // Debug flashcard section state
+            const flashcardsSection = document.getElementById('flashcards-section');
+            if (flashcardsSection) {
+                const flashcardStyle = window.getComputedStyle(flashcardsSection);
+                console.log("🎯 FLASHCARD SECTION DEBUG:");
+                console.log("- display:", flashcardStyle.display);
+                console.log("- visibility:", flashcardStyle.visibility);
+                console.log("- classList:", flashcardsSection.classList.toString());
+                console.log("- style attr:", flashcardsSection.style.cssText);
+                console.log("- offsetParent:", flashcardsSection.offsetParent);
+                console.log("- clientHeight:", flashcardsSection.clientHeight);
+            }
         }, 50);
         
         console.log("🚀 Starting simple flashcards");
@@ -2121,6 +2340,9 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
         // Show flashcard as modal like login
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.modalBackdrop?.classList.add('show');
+        if (this.dom.modalBackdrop) {
+            this.dom.modalBackdrop.style.display = 'flex'; // Override display:none from hideAllModals
+        }
         
         const flashcardsSection = document.getElementById('flashcards-section');
         if (!flashcardsSection) {
@@ -2129,7 +2351,9 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
         }
         
         flashcardsSection.classList.remove('hidden');
+        flashcardsSection.classList.add('show'); // Add 'show' class for CSS override positioning
         flashcardsSection.style.display = 'flex';
+        flashcardsSection.style.visibility = 'visible'; // Override visibility:hidden from hideAllModals
         
         this.updateFlashcard();
         console.log("✅ Flashcards started with", currentFlashcardSet.length, "cards");
@@ -2144,16 +2368,59 @@ FrancAsie Lingua - Học French, Kết nối Văn hóa`);
 
 // ===== FIX 7: CẢI THIỆN hideFlashcards() =====
 hideFlashcards() {
+    // 🔍 HIDE FLASHCARDS DEBUG
+    console.log("🔍 === HIDE FLASHCARDS DEBUG START ===");
+    console.log("🔍 hideFlashcards() called at:", new Date().toISOString());
+    console.log("🔍 Call stack:", new Error().stack);
+    console.log("🔍 Modal lock before hide:", this.modalLock);
+    
+    const flashcardsSection = document.getElementById('flashcards-section');
+    console.log("🔍 Flashcard section before hide:", {
+        element: flashcardsSection,
+        hidden: flashcardsSection?.classList.contains('hidden'),
+        display: flashcardsSection?.style.display,
+        classList: flashcardsSection?.classList.toString()
+    });
+    
     console.log("❌ Hiding flashcards");
+    
+    // 🔍 BACKDROP DEBUG BEFORE
+    console.log("🔍 Modal backdrop before hide:", {
+        element: this.dom.modalBackdrop,
+        classList: this.dom.modalBackdrop?.classList.toString(),
+        display: this.dom.modalBackdrop?.style.display,
+        visibility: this.dom.modalBackdrop?.style.visibility
+    });
     
     // Hide modal backdrop like login modal
     this.dom.modalBackdrop?.classList.add('hidden');
     this.dom.modalBackdrop?.classList.remove('show');
     
-    const flashcardsSection = document.getElementById('flashcards-section');
+    // SOLUTION 1: Force backdrop display clearing
+    if (this.dom.modalBackdrop) {
+        this.dom.modalBackdrop.style.display = 'none'; // Force override inline style
+        this.dom.modalBackdrop.style.visibility = 'hidden'; // Force hide
+    }
+    
+    // 🔍 BACKDROP DEBUG AFTER
+    console.log("🔍 Modal backdrop after hide:", {
+        classList: this.dom.modalBackdrop?.classList.toString(),
+        display: this.dom.modalBackdrop?.style.display,
+        visibility: this.dom.modalBackdrop?.style.visibility,
+        computedDisplay: this.dom.modalBackdrop ? window.getComputedStyle(this.dom.modalBackdrop).display : 'N/A'
+    });
+    
     if (flashcardsSection) {
         flashcardsSection.classList.add('hidden');
+        flashcardsSection.classList.remove('show'); // Remove CSS Override class
         console.log("✅ Flashcards hidden");
+        
+        // 🔍 POST-HIDE DEBUG
+        console.log("🔍 Flashcard section after hide:", {
+            hidden: flashcardsSection.classList.contains('hidden'),
+            display: flashcardsSection.style.display,
+            classList: flashcardsSection.classList.toString()
+        });
     }
     
     // Release modal lock
@@ -2163,6 +2430,8 @@ hideFlashcards() {
     }
     
     console.log("✅ Flashcard modal closed");
+    console.log("🔍 Modal lock after hide:", this.modalLock);
+    console.log("🔍 === HIDE FLASHCARDS DEBUG END ===");
 }
 
  updateFlashcard() {
