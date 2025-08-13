@@ -946,9 +946,11 @@ setupEventListeners() {
         
         // Force hide modal backdrop
         if (this.dom.modalBackdrop) {
+            console.log("🎯 HIDING BACKDROP - Before:", this.dom.modalBackdrop.style.cssText);
             this.dom.modalBackdrop.classList.add('hidden');
             this.dom.modalBackdrop.classList.remove('show');
             this.dom.modalBackdrop.style.display = 'none'; // Extra force
+            console.log("🎯 HIDING BACKDROP - After:", this.dom.modalBackdrop.style.cssText);
         }
         
         // Hide all individual modals with forced styling
@@ -1182,15 +1184,28 @@ setupEventListeners() {
         this.hideAllModals();
         
         // Show modal with proper classes
+        console.log("🎯 BEFORE showing backdrop - backdrop style:", this.dom.modalBackdrop?.style.cssText);
         this.dom.modalBackdrop?.classList.remove('hidden');
         this.dom.modalBackdrop?.classList.add('show');
+        console.log("🎯 AFTER showing backdrop - backdrop style:", this.dom.modalBackdrop?.style.cssText);
         
         // Show login modal with forced display override
         if (this.dom.loginModal) {
+            console.log("🎯 BEFORE showing login modal - modal style:", this.dom.loginModal.style.cssText);
             this.dom.loginModal.classList.remove('hidden');
             this.dom.loginModal.style.display = 'flex'; // Override display:none from hideAllModals
             console.log("🎯 LOGIN MODAL DISPLAY SET TO FLEX - FROM showLoginModal()");
+            console.log("🎯 AFTER showing login modal - modal style:", this.dom.loginModal.style.cssText);
         }
+        
+        // Check if backdrop is actually visible
+        setTimeout(() => {
+            const backdropComputed = window.getComputedStyle(this.dom.modalBackdrop);
+            const modalComputed = window.getComputedStyle(this.dom.loginModal);
+            console.log("🎯 FINAL CHECK - Backdrop computed display:", backdropComputed.display);
+            console.log("🎯 FINAL CHECK - Modal computed display:", modalComputed.display);
+            console.log("🎯 FINAL CHECK - Modal computed visibility:", modalComputed.visibility);
+        }, 100);
         
         this.dom.demoUsername?.focus();
         
