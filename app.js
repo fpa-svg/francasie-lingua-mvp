@@ -1073,6 +1073,58 @@ setupEventListeners() {
         console.log("🔓 Modal lock released - hideAlreadyRegisteredModal");
     }
     
+    showEventRegistrationModal(eventId) {
+        console.log("🎯 showEventRegistrationModal() called with eventId:", eventId);
+        
+        // Check if user is logged in
+        if (!currentUser) {
+            console.log("❌ User not logged in - skipping login modal");
+            alert("Bạn cần đăng nhập để đăng ký sự kiện. Vui lòng đăng nhập trước.");
+            return;
+        }
+
+        // Event data
+        const events = {
+            '1': {
+                title: 'Buổi thực hành hội thoại',
+                description: 'Tham gia buổi luyện tập giao tiếp tiếng Pháp với các bạn học cùng level'
+            },
+            '2': {
+                title: 'Workshop văn hóa Pháp', 
+                description: 'Khám phá ẩm thực và truyền thống Pháp cùng native speakers'
+            },
+            '3': {
+                title: 'Thử thách từ vựng',
+                description: 'Tham gia cuộc thi vui về từ vựng tiếng Pháp với nhiều phần quà'
+            }
+        };
+
+        const eventData = events[eventId] || events['1'];
+        
+        // Update modal content
+        if (this.dom.eventModalTitle) {
+            this.dom.eventModalTitle.textContent = `Đăng ký: ${eventData.title}`;
+        }
+        if (this.dom.eventModalDescription) {
+            this.dom.eventModalDescription.textContent = eventData.description;
+        }
+
+        // Pre-fill user info if available
+        if (currentUser && this.dom.eventParticipantName) {
+            this.dom.eventParticipantName.value = currentUser.displayName || '';
+        }
+        if (currentUser && this.dom.eventParticipantEmail) {
+            this.dom.eventParticipantEmail.value = currentUser.email || '';
+        }
+
+        // Store event ID for submission
+        this.currentEventId = eventId;
+
+        // Show modal
+        this.dom.modalBackdrop?.classList.remove('hidden');
+        this.dom.eventRegistrationModal?.classList.remove('hidden');
+    }
+
     hideEventRegistrationModal() {
         this.dom.modalBackdrop?.classList.add('hidden');
         this.dom.eventRegistrationModal?.classList.add('hidden');
@@ -2116,7 +2168,7 @@ setupMobileEventHandling() {
     
     // Disable text selection on mobile for critical elements
     document.addEventListener('selectstart', (e) => {
-        if (e.target.closest('.btn') || e.target.closest('.modal')) {
+        if (e.target && e.target.closest && (e.target.closest('.btn') || e.target.closest('.modal'))) {
             e.preventDefault();
         }
     });
