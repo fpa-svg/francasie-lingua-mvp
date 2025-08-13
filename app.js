@@ -938,10 +938,17 @@ setupEventListeners() {
     }
 
     hideAllModals() {
+        console.log("🎯 HIDEALLMODALS DEBUG - Before hiding:");
+        if (this.dom.loginModal) {
+            console.log("- Login modal display before:", this.dom.loginModal.style.display);
+            console.log("- Login modal classList before:", this.dom.loginModal.classList.toString());
+        }
+        
         // Force hide modal backdrop
         if (this.dom.modalBackdrop) {
             this.dom.modalBackdrop.classList.add('hidden');
             this.dom.modalBackdrop.classList.remove('show');
+            this.dom.modalBackdrop.style.display = 'none'; // Extra force
         }
         
         // Hide all individual modals with forced styling
@@ -962,8 +969,20 @@ setupEventListeners() {
             if (modal) {
                 modal.classList.add('hidden');
                 modal.style.display = 'none'; // Force hide on mobile
+                modal.style.visibility = 'hidden'; // Extra force hide
+                
+                // Debug specific for login modal
+                if (modal === this.dom.loginModal) {
+                    console.log("🎯 Setting login modal to hidden - style.display set to 'none'");
+                }
             }
         });
+        
+        console.log("🎯 HIDEALLMODALS DEBUG - After hiding:");
+        if (this.dom.loginModal) {
+            console.log("- Login modal display after:", this.dom.loginModal.style.display);
+            console.log("- Login modal classList after:", this.dom.loginModal.classList.toString());
+        }
         
         // Reset modal lock when hiding all modals (safety measure)
         // Reset lock unless it's a critical operation that needs to complete
@@ -1148,6 +1167,8 @@ setupEventListeners() {
     showLoginModal() {
         console.log("🎯 showLoginModal() called");
         console.log("🎯 Call stack:", new Error().stack);
+        console.log("🎯 WHO IS CALLING showLoginModal() - TRACE:");
+        console.trace();
         console.log("🎯 loginModal element:", this.dom.loginModal);
         console.log("🎯 modalBackdrop element:", this.dom.modalBackdrop);
         
@@ -1168,6 +1189,7 @@ setupEventListeners() {
         if (this.dom.loginModal) {
             this.dom.loginModal.classList.remove('hidden');
             this.dom.loginModal.style.display = 'flex'; // Override display:none from hideAllModals
+            console.log("🎯 LOGIN MODAL DISPLAY SET TO FLEX - FROM showLoginModal()");
         }
         
         this.dom.demoUsername?.focus();
